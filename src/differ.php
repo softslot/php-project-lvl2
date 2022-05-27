@@ -35,7 +35,7 @@ function genDiff($firstFile, $secondFile)
     }
 
     $str = implode("\n  ", $data);
-    print("{\n  {$str}\n}\n");
+    return "{\n  {$str}\n}\n";
 }
 
 function normalizeValue($value): string
