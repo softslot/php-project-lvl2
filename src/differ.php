@@ -2,10 +2,12 @@
 
 namespace Hexlet\Code\Differ;
 
+use Symfony\Component\Yaml\Yaml;
+
 function genDiff($firstFile, $secondFile)
 {
-    $file1 = json_decode(file_get_contents($firstFile), true);
-    $file2 = json_decode(file_get_contents($secondFile), true);
+    $file1 = Yaml::parseFile($firstFile);
+    $file2 = Yaml::parseFile($secondFile);
 
     $keys1 = array_keys($file1);
     $keys2 = array_keys($file2);
