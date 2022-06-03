@@ -23,8 +23,8 @@ function genDiff($firstFile, $secondFile)
     foreach ($uniqueKeys as $key) {
         $value1 = $file1[$key] ?? null;
         $value2 = $file2[$key] ?? null;
-        $normalizedValue1 = normalizeValue($value1);
-        $normalizedValue2 = normalizeValue($value2);
+        $normalizedValue1 = Stringify($value1);
+        $normalizedValue2 = Stringify($value2);
 
         if (isset($value1) && isset($value2)) {
             if ($value1 === $value2) {
@@ -44,14 +44,9 @@ function genDiff($firstFile, $secondFile)
     return "{\n  {$str}\n}\n";
 }
 
-function normalizeValue($value): string
+function Stringify($value): string
 {
-    return match ($value) {
-        false => 'false',
-        true => 'true',
-        null => 'null',
-        default => $value,
-    };
+    return trim(var_export($value, true), "'");
 }
 
 /**
