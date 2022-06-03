@@ -2,12 +2,16 @@
 
 namespace Hexlet\Code\Differ;
 
-use Symfony\Component\Yaml\Yaml;
+use function Hexlet\Code\Parsers\JsonParser\parse as parseJson;
+use function Hexlet\Code\Parsers\YamlParser\parse as parseYaml;
 
+/**
+ * @throws \Exception
+ */
 function genDiff($firstFile, $secondFile)
 {
-    $file1 = Yaml::parseFile($firstFile);
-    $file2 = Yaml::parseFile($secondFile);
+    $file1 = getParser($firstFile);
+    $file2 = getParser($secondFile);
 
     $keys1 = array_keys($file1);
     $keys2 = array_keys($file2);
@@ -47,5 +51,19 @@ function normalizeValue($value): string
         true => 'true',
         null => 'null',
         default => $value,
+    };
+}
+
+/**
+ * @throws \Exception
+ */
+function getParser($filePath)
+{
+    ['extension' => $extension] = pathinfo($filePath);
+
+    return match ($extension) {
+        'json' => parseJson($filePath),
+        'yml' => parseYaml($filePath),
+        default => throw new \Exception('Undefended format!'),
     };
 }
