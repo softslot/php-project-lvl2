@@ -6,20 +6,16 @@ use function Hexlet\Code\Differ\genDiff;
 
 class DifferTest extends TestCase
 {
-    private string $filePathJson1 = 'tests/fixtures/file1.json';
-    private string $filePathJson2 = 'tests/fixtures/file2.json';
-    private string $filePathYaml1 = 'tests/fixtures/file1.yml';
-    private string $filePathYaml2 = 'tests/fixtures/file2.yml';
+    private string $filePathJson1 = __DIR__ . '/fixtures/file1.json';
+    private string $filePathJson2 = __DIR__ . '/fixtures/file2.json';
+//    private string $filePathYaml1 = __DIR__ . '/fixtures/file1.yml';
+//    private string $filePathYaml2 = __DIR__ . '/fixtures/file2.yml';
+    private string $expected;
 
-    private string $expected = "{
-  - follow : false
-    host : hexlet.io
-  - proxy : 123.234.53.22
-  - timeout : 50
-  + timeout : 20
-  + verbose : true
-}
-";
+    protected function setUp(): void
+    {
+        $this->expected = file_get_contents(__DIR__ . '/fixtures/expected.txt');
+    }
 
     public function testDiffJson()
     {
@@ -27,9 +23,9 @@ class DifferTest extends TestCase
         $this->assertEquals($this->expected, $result);
     }
 
-    public function testDiffYaml()
-    {
-        $result = genDiff($this->filePathYaml1, $this->filePathYaml2);
-        $this->assertEquals($this->expected, $result);
-    }
+//    public function testDiffYaml()
+//    {
+//        $result = genDiff($this->filePathYaml1, $this->filePathYaml2);
+//        $this->assertEquals($this->expected, $result);
+//    }
 }

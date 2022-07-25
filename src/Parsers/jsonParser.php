@@ -2,7 +2,7 @@
 
 namespace Hexlet\Code\Parsers\JsonParser;
 
-function parse($filePath)
+function parse(string $data): object
 {
-    return json_decode(file_get_contents($filePath), true);
+    return json_decode($data);
 }

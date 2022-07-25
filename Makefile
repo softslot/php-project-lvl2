@@ -19,5 +19,8 @@ gendiff:
 testdiff:
 	./bin/gendiff tests/fixtures/file1.json tests/fixtures/file2.json
 
+testdiffy:
+	./bin/gendiff tests/fixtures/file1.yml tests/fixtures/file2.yml
+
 test:
 	composer exec --verbose phpunit tests

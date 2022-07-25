@@ -4,7 +4,7 @@ namespace Hexlet\Code\Parsers\YamlParser;
 
 use Symfony\Component\Yaml\Yaml;
 
-function parse($filePath)
+function parse(string $data): object
 {
-    return Yaml::parseFile($filePath);
+    return Yaml::parse($data, Yaml::PARSE_OBJECT_FOR_MAP);
 }
