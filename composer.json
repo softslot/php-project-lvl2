@@ -16,8 +16,10 @@
         "files": [
             "src/differ.php",
             "src/Parsers.php",
-            "src/Parsers/jsonParser.php",
-            "src/Parsers/yamlParser.php"
+            "src/Parsers/JsonParser.php",
+            "src/Parsers/YamlParser.php",
+            "src/Formatters/JsonFormatter.php",
+            "src/Formatters/StylishFormatters.php"
         ]
     },
     "bin": [
