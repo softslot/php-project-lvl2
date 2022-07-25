@@ -2,11 +2,11 @@
 
 namespace Hexlet\Code\Formatters\StylishFormatter;
 
-const INDENT_LENGTH = 4;
+const INITIAL_INDENT_LENGTH = 4;
 
 function getIndent(int $num): string
 {
-    return str_repeat(' ', INDENT_LENGTH * $num);
+    return str_repeat(' ', INITIAL_INDENT_LENGTH * $num);
 }
 
 function stringify($value, $depth)
@@ -38,37 +38,36 @@ function stringifyComplexValue($complexValue, $depth)
 function render(array $tree, int $depth = 0)
 {
     $indent = getIndent($depth);
-    $output = array_map(function ($node) use ($depth, $indent): string {
 
-        list('name' => $name, 'status' => $status, 'oldValue' => $oldValue,
-            'newValue' => $newValue, 'children' => $children) = $node;
+    $fn = function ($node) use ($depth, $indent): string {
+        ['name' => $name, 'status' => $status, 'oldValue' => $oldValue,
+            'newValue' => $newValue, 'children' => $children] = $node;
 
         switch ($status) {
             case 'added':
                 $formattedValue = stringify($newValue, $depth);
-                return "{$indent}  + {$name}: {$formattedValue}";
-
+                return rtrim("{$indent}  + {$name}: {$formattedValue}");
             case 'removed':
                 $formattedValue = stringify($oldValue, $depth);
-                return "{$indent}  - {$name}: {$formattedValue}";
-
+                return rtrim("{$indent}  - {$name}: {$formattedValue}");
             case 'unchanged':
                 $formattedValue = stringify($oldValue, $depth);
-                return "{$indent}    {$name}: {$formattedValue}";
-
+                return rtrim("{$indent}    {$name}: {$formattedValue}");
             case 'changed':
-                $deleted = stringify($oldValue, $depth);
-                $added = stringify($newValue, $depth);
-                return "{$indent}  - {$name}: {$deleted}\n{$indent}  + {$name}: {$added}";
-
+                $formattedOldValue = stringify($oldValue, $depth);
+                $formattedNewValue = stringify($newValue, $depth);
+                $parts = [
+                    rtrim("{$indent}  - {$name}: {$formattedOldValue}"),
+                    rtrim("{$indent}  + {$name}: {$formattedNewValue}"),
+                ];
+                return implode("\n", $parts);
             case 'nested':
                 $stylishOutput = render($children, $depth + 1);
-                return "{$indent}    {$name}: {$stylishOutput}";
-
+                return rtrim("{$indent}    {$name}: {$stylishOutput}");
             default:
-                throw new \Exception("Unknown node status '{$status}'!");
+                throw new \RuntimeException("Unknown node status '{$status}'!");
         }
-    }, $tree);
+    };
 
-    return implode("\n", ["{", ...$output, "{$indent}}"]);
+    return implode("\n", ["{", ...array_map($fn, $tree), "{$indent}}"]);
 }
