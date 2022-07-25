@@ -13,7 +13,7 @@ function genDiff($firstFilePath, $secondFilePath, $format = 'stylish')
 
     $tree = buildAstTree($dataFirstFile, $dataSecondFile);
 
-    render($tree);
+    return render($tree) . "\n";
 }
 
 function getDataFromFile(string $filePath): object
