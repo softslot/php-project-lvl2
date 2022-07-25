@@ -19,7 +19,8 @@
             "src/Parsers/JsonParser.php",
             "src/Parsers/YamlParser.php",
             "src/Formatters/JsonFormatter.php",
-            "src/Formatters/StylishFormatters.php"
+            "src/Formatters/StylishFormatters.php",
+            "src/Formatters/PlainFormatter.php"
         ]
     },
     "bin": [

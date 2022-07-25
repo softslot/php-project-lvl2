@@ -3,7 +3,7 @@
 namespace Hexlet\Code\Differ;
 
 use function Hexlet\Code\Parsers\parseDate;
-use function Hexlet\Code\Formatters\StylishFormatter\render;
+use function Hexlet\Code\Formatters\PlainFormatter\render;
 use function Funct\Collection\sortBy;
 
 function genDiff($firstFilePath, $secondFilePath, $format = 'stylish')
