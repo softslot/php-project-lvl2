@@ -8,11 +8,11 @@ use function Hexlet\Code\Parsers\YamlParser\parseYaml;
 /**
  * @throws \Exception
  */
-function parseDate($data, $extension)
+function getParser($extension)
 {
     return match ($extension) {
-        'json' => parseJson($data),
-        'yml', 'yaml' => parseYaml($data),
-        default => throw new \Exception("Undefended format '{$extension}'!"),
+        'json'        => fn($data) => parseJson($data),
+        'yml', 'yaml' => fn($data) => parseYaml($data),
+        default       => throw new \Exception("Undefended format '{$extension}'!"),
     };
 }

@@ -51,5 +51,5 @@ function generatePlainOutput(array $tree, array $propertyNames): array
 
 function renderPlain(array $data): string
 {
-    return implode("\n", generatePlainOutput($data, []));
+    return implode("\n", generatePlainOutput($data, [])) . "\n";
 }

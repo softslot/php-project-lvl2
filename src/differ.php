@@ -3,7 +3,7 @@
 namespace Hexlet\Code\Differ;
 
 use function Hexlet\Code\Formatters\getFormatter;
-use function Hexlet\Code\Parsers\parseDate;
+use function Hexlet\Code\Parsers\getParser;
 use function Funct\Collection\sortBy;
 
 function genDiff($firstFilePath, $secondFilePath, $format = 'stylish')
@@ -13,15 +13,18 @@ function genDiff($firstFilePath, $secondFilePath, $format = 'stylish')
 
     $tree = buildAstTree($dataFirstFile, $dataSecondFile);
 
-    return getFormatter($tree, $format) . "\n";
+    $formatter = getFormatter($format);
+
+    return $formatter($tree);
 }
 
 function getDataFromFile(string $filePath): object
 {
     $extension = pathinfo($filePath, PATHINFO_EXTENSION);
     $data = file_get_contents($filePath);
+    $parser = getParser($extension);
 
-    return parseDate($data, $extension);
+    return $parser($data);
 }
 
 function buildAstTree($dataBefore, $dataAfter)
