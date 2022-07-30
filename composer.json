@@ -5,8 +5,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Konstantin Korolenko",
-            "email": "softslot-com@yandex.ru"
+            "name": "Konstantin Korolenko"
         }
     ],
     "autoload": {
