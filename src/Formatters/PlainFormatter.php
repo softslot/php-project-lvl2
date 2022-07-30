@@ -19,29 +19,31 @@ function generatePlainOutput(array $tree, array $propertyNames): array
 {
     $output = array_map(function ($child) use ($propertyNames): string|array {
         $name = implode('.', [...$propertyNames, $child['name']]);
-
+        $result = null;
         switch ($child['status']) {
             case 'added':
                 $value = stringify($child['newValue']);
-                return "Property '{$name}' was added with value: {$value}";
-
+                $result = "Property '{$name}' was added with value: {$value}";
+                break;
             case 'removed':
-                return "Property '{$name}' was removed";
-
+                $result = "Property '{$name}' was removed";
+                break;
             case 'changed':
                 $oldValue = stringify($child['oldValue']);
                 $newValue = stringify($child['newValue']);
-                return "Property '{$name}' was updated. From {$oldValue} to {$newValue}";
-
+                $result = "Property '{$name}' was updated. From {$oldValue} to {$newValue}";
+                break;
             case 'unchanged':
-                return "";
-
+                $result = "";
+                break;
             case 'nested':
-                return generatePlainOutput($child['children'], [...$propertyNames, $child['name']]);
-
+                $result = generatePlainOutput($child['children'], [...$propertyNames, $child['name']]);
+                break;
             default:
                 throw new \Exception("Invalid node status: {$child['status']}");
         }
+
+        return $result;
     }, $tree);
 
     $filteredOutput = array_filter($output);
