@@ -43,12 +43,12 @@ function renderStylish(array $tree, int $depth = 0)
         switch ($node['status']) {
             case 'added':
                 $formattedValue = stringify($node['newValue'], $depth);
-                return rtrim("{$indent}  + {$node['name']}: {$formattedValue}");
-
+                $result = rtrim("{$indent}  + {$node['name']}: {$formattedValue}");
+                break;
             case 'removed':
                 $formattedValue = stringify($node['oldValue'], $depth);
-                return rtrim("{$indent}  - {$node['name']}: {$formattedValue}");
-
+                $result = rtrim("{$indent}  - {$node['name']}: {$formattedValue}");
+                break;
             case 'changed':
                 $formattedOldValue = stringify($node['oldValue'], $depth);
                 $formattedNewValue = stringify($node['newValue'], $depth);
@@ -56,19 +56,21 @@ function renderStylish(array $tree, int $depth = 0)
                     rtrim("{$indent}  - {$node['name']}: {$formattedOldValue}"),
                     rtrim("{$indent}  + {$node['name']}: {$formattedNewValue}"),
                 ];
-                return implode("\n", $parts);
-
+                $result = implode("\n", $parts);
+                break;
             case 'unchanged':
                 $formattedValue = stringify($node['oldValue'], $depth);
-                return rtrim("{$indent}    {$node['name']}: {$formattedValue}");
-
+                $result = rtrim("{$indent}    {$node['name']}: {$formattedValue}");
+                break;
             case 'nested':
                 $stylishOutput = renderStylish($node['children'], $depth + 1);
-                return rtrim("{$indent}    {$node['name']}: {$stylishOutput}");
-
+                $result = rtrim("{$indent}    {$node['name']}: {$stylishOutput}");
+                break;
             default:
                 throw new \RuntimeException("Unknown node status '{$node['status']}'!");
         }
+
+        return $result;
     };
 
     return implode("\n", ["{", ...array_map($fn, $tree), "{$indent}}"]) . "\n";
