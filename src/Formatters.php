@@ -6,7 +6,7 @@ use function Hexlet\Code\Formatters\JsonFormatter\renderJson;
 use function Hexlet\Code\Formatters\PlainFormatter\renderPlain;
 use function Hexlet\Code\Formatters\StylishFormatter\renderStylish;
 
-function getFormatter($format)
+function getFormatter(string $format): callable
 {
     return match ($format) {
         'json'    => fn ($data) => renderJson($data),

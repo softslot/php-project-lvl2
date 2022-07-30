@@ -6,13 +6,11 @@ use function Hexlet\Code\Formatters\getFormatter;
 use function Hexlet\Code\Parsers\getParser;
 use function Funct\Collection\sortBy;
 
-function genDiff($firstFilePath, $secondFilePath, $format = 'stylish')
+function genDiff(string $firstFilePath, string $secondFilePath, string $format = 'stylish'): string
 {
     $dataFirstFile = getDataFromFile($firstFilePath);
     $dataSecondFile = getDataFromFile($secondFilePath);
-
     $tree = buildAstTree($dataFirstFile, $dataSecondFile);
-
     $formatter = getFormatter($format);
 
     return $formatter($tree);
@@ -27,7 +25,7 @@ function getDataFromFile(string $filePath): object
     return $parser($data);
 }
 
-function buildAstTree($dataBefore, $dataAfter)
+function buildAstTree($dataBefore, $dataAfter): array
 {
     $keys = array_unique([
         ...array_keys(get_object_vars($dataBefore)),
@@ -57,7 +55,7 @@ function buildAstTree($dataBefore, $dataAfter)
     }, $sortedKeys);
 }
 
-function makeNode($name, $status, $oldValue = null, $newValue = null, $children = [])
+function makeNode($name, $status, $oldValue = null, $newValue = null, $children = []): array
 {
     return [
         'name'     => $name,

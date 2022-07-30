@@ -5,10 +5,7 @@ namespace Hexlet\Code\Parsers;
 use function Hexlet\Code\Parsers\JsonParser\parseJson;
 use function Hexlet\Code\Parsers\YamlParser\parseYaml;
 
-/**
- * @throws \Exception
- */
-function getParser($extension)
+function getParser(string $extension): callable
 {
     return match ($extension) {
         'json'        => fn($data) => parseJson($data),

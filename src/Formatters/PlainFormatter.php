@@ -4,7 +4,7 @@ namespace Hexlet\Code\Formatters\PlainFormatter;
 
 use function Funct\Collection\flattenAll;
 
-function stringify($value)
+function stringify($value): string
 {
     $valueType = gettype($value);
     return match ($valueType) {
@@ -17,7 +17,7 @@ function stringify($value)
 
 function generatePlainOutput(array $tree, array $propertyNames): array
 {
-    $output = array_map(function ($child) use ($propertyNames) {
+    $output = array_map(function ($child) use ($propertyNames): string {
         $name = implode('.', [...$propertyNames, $child['name']]);
 
         switch ($child['status']) {
@@ -44,9 +44,7 @@ function generatePlainOutput(array $tree, array $propertyNames): array
         }
     }, $tree);
 
-    $filteredOutput = array_filter($output);
-
-    return flattenAll($filteredOutput);
+    return flattenAll(array_filter($output));
 }
 
 function renderPlain(array $data): string
