@@ -14,7 +14,7 @@
             "Hexlet\\Code\\Tests\\" : "tests"
         },
         "files": [
-            "src/differ.php",
+            "src/Differ.php",
             "src/Parsers.php",
             "src/Parsers/JsonParser.php",
             "src/Parsers/YamlParser.php",
