@@ -2,7 +2,7 @@
 
 namespace Hexlet\Code\Formatters\JsonFormatter;
 
-function render($data)
+function renderJson($data)
 {
-    echo (string) json_encode($data, JSON_PRETTY_PRINT);
+    return json_encode($data, JSON_PRETTY_PRINT);
 }

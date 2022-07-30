@@ -2,8 +2,8 @@
 
 namespace Hexlet\Code\Differ;
 
+use function Hexlet\Code\Formatters\getFormatter;
 use function Hexlet\Code\Parsers\parseDate;
-use function Hexlet\Code\Formatters\PlainFormatter\render;
 use function Funct\Collection\sortBy;
 
 function genDiff($firstFilePath, $secondFilePath, $format = 'stylish')
@@ -13,7 +13,7 @@ function genDiff($firstFilePath, $secondFilePath, $format = 'stylish')
 
     $tree = buildAstTree($dataFirstFile, $dataSecondFile);
 
-    return render($tree) . "\n";
+    return getFormatter($tree, $format) . "\n";
 }
 
 function getDataFromFile(string $filePath): object
@@ -57,8 +57,8 @@ function buildAstTree($dataBefore, $dataAfter)
 function makeNode($name, $status, $oldValue = null, $newValue = null, $children = [])
 {
     return [
-        'name' => $name,
-        'status' => $status,
+        'name'     => $name,
+        'status'   => $status,
         'oldValue' => $oldValue,
         'newValue' => $newValue,
         'children' => $children,

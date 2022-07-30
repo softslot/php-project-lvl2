@@ -24,27 +24,32 @@ function generatePlainOutput(array $tree, array $propertyNames): array
             case 'added':
                 $value = stringify($child['newValue']);
                 return "Property '{$name}' was added with value: {$value}";
+
             case 'removed':
                 return "Property '{$name}' was removed";
-            case 'unchanged':
-                return "";
+
             case 'changed':
                 $oldValue = stringify($child['oldValue']);
                 $newValue = stringify($child['newValue']);
                 return "Property '{$name}' was updated. From {$oldValue} to {$newValue}";
+
+            case 'unchanged':
+                return "";
+
             case 'nested':
                 return generatePlainOutput($child['children'], [...$propertyNames, $child['name']]);
+
             default:
-                throw new \Exception("Invalid node state: {$child['status']}");
+                throw new \Exception("Invalid node status: {$child['status']}");
         }
     }, $tree);
 
-    $filteredOutput = array_filter($output, fn($part) => $part !== '');
+    $filteredOutput = array_filter($output);
 
     return flattenAll($filteredOutput);
 }
 
-function render(array $data): string
+function renderPlain(array $data): string
 {
     return implode("\n", generatePlainOutput($data, []));
 }

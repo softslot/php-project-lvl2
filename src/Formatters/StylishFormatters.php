@@ -27,7 +27,7 @@ function stringifyComplexValue($complexValue, $depth)
 
     $indent = getIndent($depth);
 
-    $stringifiedValue = array_map(function ($value, $key) use ($depth, $indent): string {
+    $stringifiedValue = array_map(function ($value, $key) use ($depth, $indent) {
         $formattedValue = stringify($value, $depth);
         return "{$indent}    {$key}: {$formattedValue}";
     }, $normalizedValue, array_keys($normalizedValue));
@@ -35,37 +35,39 @@ function stringifyComplexValue($complexValue, $depth)
     return implode("\n", ["{", ...$stringifiedValue, "{$indent}}"]);
 }
 
-function render(array $tree, int $depth = 0)
+function renderStylish(array $tree, int $depth = 0)
 {
     $indent = getIndent($depth);
 
     $fn = function ($node) use ($depth, $indent): string {
-        ['name' => $name, 'status' => $status, 'oldValue' => $oldValue,
-            'newValue' => $newValue, 'children' => $children] = $node;
-
-        switch ($status) {
+        switch ($node['status']) {
             case 'added':
-                $formattedValue = stringify($newValue, $depth);
-                return rtrim("{$indent}  + {$name}: {$formattedValue}");
+                $formattedValue = stringify($node['newValue'], $depth);
+                return rtrim("{$indent}  + {$node['name']}: {$formattedValue}");
+
             case 'removed':
-                $formattedValue = stringify($oldValue, $depth);
-                return rtrim("{$indent}  - {$name}: {$formattedValue}");
-            case 'unchanged':
-                $formattedValue = stringify($oldValue, $depth);
-                return rtrim("{$indent}    {$name}: {$formattedValue}");
+                $formattedValue = stringify($node['oldValue'], $depth);
+                return rtrim("{$indent}  - {$node['name']}: {$formattedValue}");
+
             case 'changed':
-                $formattedOldValue = stringify($oldValue, $depth);
-                $formattedNewValue = stringify($newValue, $depth);
+                $formattedOldValue = stringify($node['oldValue'], $depth);
+                $formattedNewValue = stringify($node['newValue'], $depth);
                 $parts = [
-                    rtrim("{$indent}  - {$name}: {$formattedOldValue}"),
-                    rtrim("{$indent}  + {$name}: {$formattedNewValue}"),
+                    rtrim("{$indent}  - {$node['name']}: {$formattedOldValue}"),
+                    rtrim("{$indent}  + {$node['name']}: {$formattedNewValue}"),
                 ];
                 return implode("\n", $parts);
+
+            case 'unchanged':
+                $formattedValue = stringify($node['oldValue'], $depth);
+                return rtrim("{$indent}    {$node['name']}: {$formattedValue}");
+
             case 'nested':
-                $stylishOutput = render($children, $depth + 1);
-                return rtrim("{$indent}    {$name}: {$stylishOutput}");
+                $stylishOutput = renderStylish($node['children'], $depth + 1);
+                return rtrim("{$indent}    {$node['name']}: {$stylishOutput}");
+
             default:
-                throw new \RuntimeException("Unknown node status '{$status}'!");
+                throw new \RuntimeException("Unknown node status '{$node['status']}'!");
         }
     };
 

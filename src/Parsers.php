@@ -2,8 +2,8 @@
 
 namespace Hexlet\Code\Parsers;
 
-use function Hexlet\Code\Parsers\JsonParser\parse as parseJson;
-use function Hexlet\Code\Parsers\YamlParser\parse as parseYaml;
+use function Hexlet\Code\Parsers\JsonParser\parseJson;
+use function Hexlet\Code\Parsers\YamlParser\parseYaml;
 
 /**
  * @throws \Exception
