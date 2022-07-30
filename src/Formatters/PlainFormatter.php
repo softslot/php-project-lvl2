@@ -19,7 +19,6 @@ function generatePlainOutput(array $tree, array $propertyNames): array
 {
     $output = array_map(function ($child) use ($propertyNames): string|array {
         $name = implode('.', [...$propertyNames, $child['name']]);
-        $result = null;
         switch ($child['status']) {
             case 'added':
                 $value = stringify($child['newValue']);
