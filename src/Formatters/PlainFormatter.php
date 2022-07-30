@@ -17,7 +17,7 @@ function stringify($value): string
 
 function generatePlainOutput(array $tree, array $propertyNames): array
 {
-    $output = array_map(function ($child) use ($propertyNames): string {
+    $output = array_map(function ($child) use ($propertyNames): string|array {
         $name = implode('.', [...$propertyNames, $child['name']]);
 
         switch ($child['status']) {
@@ -44,7 +44,9 @@ function generatePlainOutput(array $tree, array $propertyNames): array
         }
     }, $tree);
 
-    return flattenAll(array_filter($output));
+    $filteredOutput = array_filter($output);
+
+    return flattenAll($filteredOutput);
 }
 
 function renderPlain(array $data): string
