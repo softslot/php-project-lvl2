@@ -32,3 +32,30 @@
 </details>
 
 [![asciicast](https://asciinema.org/a/vnGWrgMeWbz1NnAex9xdzbxeV.svg)](https://asciinema.org/a/vnGWrgMeWbz1NnAex9xdzbxeV)
+
+<details>
+
+<summary>file1.yml </summary>
+
+```yaml
+host: hexlet.io
+timeout: 50
+proxy: 123.234.53.22
+follow: false
+```
+
+</details>
+
+<details>
+
+<summary>file2.yml </summary>
+
+```yaml
+timeout: 20
+verbose: true
+host: hexlet.io
+```
+
+</details>
+
+[![asciicast](https://asciinema.org/a/mj0eeZojQzdEeNEPHHj8wv1KL.svg)](https://asciinema.org/a/mj0eeZojQzdEeNEPHHj8wv1KL)
