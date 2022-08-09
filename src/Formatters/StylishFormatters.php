@@ -4,12 +4,22 @@ namespace Differ\Formatters\StylishFormatter;
 
 const INITIAL_INDENT_LENGTH = 4;
 
+/**
+ * @param int $num
+ * @return string
+ */
 function getIndent(int $num): string
 {
     return str_repeat(' ', INITIAL_INDENT_LENGTH * $num);
 }
 
-function stringify($value, $depth)
+/**
+ * @param mixed $value
+ * @param int $depth
+ * @return mixed
+ * @throws \Exception
+ */
+function stringify(mixed $value, int $depth): mixed
 {
     $valueType = gettype($value);
     return match ($valueType) {
@@ -21,7 +31,13 @@ function stringify($value, $depth)
     };
 }
 
-function stringifyComplexValue($complexValue, $depth)
+/**
+ * @param mixed $complexValue
+ * @param int $depth
+ * @return string
+ * @throws \Exception
+ */
+function stringifyComplexValue(mixed $complexValue, int $depth): string
 {
     $normalizedValue = is_object($complexValue) ? get_object_vars($complexValue) : $complexValue;
 
@@ -35,7 +51,13 @@ function stringifyComplexValue($complexValue, $depth)
     return implode("\n", ["{", ...$stringifiedValue, "{$indent}}"]);
 }
 
-function renderStylish(array $tree, int $depth = 0)
+/**
+ * @param array $tree
+ * @param int $depth
+ * @return string
+ * @throws \Exception
+ */
+function renderStylish(array $tree, int $depth = 0): string
 {
     $indent = getIndent($depth);
 
