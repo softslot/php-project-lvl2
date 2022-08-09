@@ -27,6 +27,7 @@
         "/bin/gendiff"
     ],
     "require": {
+        "php": "^8.1",
         "docopt/docopt": "^1.0",
         "ext-json": "*",
         "symfony/yaml": "^6.1",
