@@ -1,46 +1,46 @@
-{
-    "0": {
+[
+    {
         "name": "common",
         "status": "nested",
         "oldValue": null,
         "newValue": null,
-        "children": {
-            "4": {
+        "children": [
+            {
                 "name": "follow",
                 "status": "added",
                 "oldValue": null,
                 "newValue": false,
                 "children": []
             },
-            "0": {
+            {
                 "name": "setting1",
                 "status": "unchanged",
                 "oldValue": "Value 1",
                 "newValue": null,
                 "children": []
             },
-            "1": {
+            {
                 "name": "setting2",
                 "status": "removed",
                 "oldValue": 200,
                 "newValue": null,
                 "children": []
             },
-            "2": {
+            {
                 "name": "setting3",
                 "status": "changed",
                 "oldValue": true,
                 "newValue": null,
                 "children": []
             },
-            "7": {
+            {
                 "name": "setting4",
                 "status": "added",
                 "oldValue": null,
                 "newValue": "blah blah",
                 "children": []
             },
-            "8": {
+            {
                 "name": "setting5",
                 "status": "added",
                 "oldValue": null,
@@ -49,13 +49,13 @@
                 },
                 "children": []
             },
-            "3": {
+            {
                 "name": "setting6",
                 "status": "nested",
                 "oldValue": null,
                 "newValue": null,
-                "children": {
-                    "1": {
+                "children": [
+                    {
                         "name": "doge",
                         "status": "nested",
                         "oldValue": null,
@@ -70,25 +70,25 @@
                             }
                         ]
                     },
-                    "0": {
+                    {
                         "name": "key",
                         "status": "unchanged",
                         "oldValue": "value",
                         "newValue": null,
                         "children": []
                     },
-                    "3": {
+                    {
                         "name": "ops",
                         "status": "added",
                         "oldValue": null,
                         "newValue": "vops",
                         "children": []
                     }
-                }
+                ]
             }
-        }
+        ]
     },
-    "1": {
+    {
         "name": "group1",
         "status": "nested",
         "oldValue": null,
@@ -119,7 +119,7 @@
             }
         ]
     },
-    "2": {
+    {
         "name": "group2",
         "status": "removed",
         "oldValue": {
@@ -131,7 +131,7 @@
         "newValue": null,
         "children": []
     },
-    "5": {
+    {
         "name": "group3",
         "status": "added",
         "oldValue": null,
@@ -145,4 +145,4 @@
         },
         "children": []
     }
-}
+]

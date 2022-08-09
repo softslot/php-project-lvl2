@@ -4,7 +4,7 @@ namespace Differ\Differ;
 
 use function Differ\Formatters\getFormatter;
 use function Differ\Parsers\getParser;
-use function Funct\Collection\sortBy;
+use function Functional\sort;
 
 function genDiff(string $firstFilePath, string $secondFilePath, string $format = 'stylish'): string
 {
@@ -32,7 +32,7 @@ function buildAstTree($dataBefore, $dataAfter): array
         ...array_keys(get_object_vars($dataAfter)),
     ]);
 
-    $sortedKeys = sortBy($keys, fn($key) => $key);
+    $sortedKeys = sort($keys, fn ($left, $right) => strcmp($left, $right));
 
     return array_map(function ($key) use ($dataBefore, $dataAfter) {
         if (!property_exists($dataBefore, $key)) {

@@ -2,7 +2,7 @@
 
 namespace Differ\Formatters\PlainFormatter;
 
-use function Funct\Collection\flattenAll;
+use function Functional\flatten;
 
 function stringify($value): string
 {
@@ -47,7 +47,7 @@ function generatePlainOutput(array $tree, array $propertyNames): array
 
     $filteredOutput = array_filter($output);
 
-    return flattenAll($filteredOutput);
+    return flatten($filteredOutput);
 }
 
 function renderPlain(array $data): string
