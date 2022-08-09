@@ -73,5 +73,5 @@ function renderStylish(array $tree, int $depth = 0)
         return $result;
     };
 
-    return implode("\n", ["{", ...array_map($fn, $tree), "{$indent}}"]) . "\n";
+    return implode("\n", ["{", ...array_map($fn, $tree), "{$indent}}"]);
 }
