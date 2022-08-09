@@ -6,10 +6,10 @@ use function Hexlet\Code\Differ\genDiff;
 
 class DifferTest extends TestCase
 {
-    private string $filePathJson1 = __DIR__ . '/fixtures/file1.json';
-    private string $filePathJson2 = __DIR__ . '/fixtures/file2.json';
-    private string $filePathYaml1 = __DIR__ . '/fixtures/file1.yml';
-    private string $filePathYaml2 = __DIR__ . '/fixtures/file2.yml';
+    private string $filePathJson1 = __DIR__ . '/fixtures/first_file.json';
+    private string $filePathJson2 = __DIR__ . '/fixtures/second_file.json';
+    private string $filePathYaml1 = __DIR__ . '/fixtures/first_file.yml';
+    private string $filePathYaml2 = __DIR__ . '/fixtures/second_file.yml';
     private string $expectedOutputStylish;
     private string $expectedOutputPlain;
     private string $expectedOutputJson;
