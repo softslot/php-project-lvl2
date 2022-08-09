@@ -4,7 +4,12 @@ namespace Differ\Formatters\PlainFormatter;
 
 use function Functional\flatten;
 
-function stringify($value): string
+/**
+ * @param mixed $value
+ * @return string
+ * @throws \Exception
+ */
+function stringify(mixed $value): string
 {
     $valueType = gettype($value);
     return match ($valueType) {
@@ -15,6 +20,12 @@ function stringify($value): string
     };
 }
 
+/**
+ * @param array $tree
+ * @param array $propertyNames
+ * @return array
+ * @throws \Exception
+ */
 function generatePlainOutput(array $tree, array $propertyNames): array
 {
     $output = array_map(function ($child) use ($propertyNames): string|array {
@@ -50,6 +61,11 @@ function generatePlainOutput(array $tree, array $propertyNames): array
     return flatten($filteredOutput);
 }
 
+/**
+ * @param array $data
+ * @return string
+ * @throws \Exception
+ */
 function renderPlain(array $data): string
 {
     return implode("\n", generatePlainOutput($data, []));

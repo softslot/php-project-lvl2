@@ -25,7 +25,12 @@ function getDataFromFile(string $filePath): object
     return $parser($data);
 }
 
-function buildAstTree($dataBefore, $dataAfter): array
+/**
+ * @param object $dataBefore
+ * @param object $dataAfter
+ * @return array
+ */
+function buildAstTree(object $dataBefore, object $dataAfter): array
 {
     $keys = array_unique([
         ...array_keys(get_object_vars($dataBefore)),
@@ -55,8 +60,13 @@ function buildAstTree($dataBefore, $dataAfter): array
     }, $sortedKeys);
 }
 
-function makeNode($name, $status, $oldValue = null, $newValue = null, $children = []): array
-{
+function makeNode(
+    string $name,
+    string $status,
+    mixed $oldValue = null,
+    mixed $newValue = null,
+    array $children = []
+): array {
     return [
         'name'     => $name,
         'status'   => $status,
