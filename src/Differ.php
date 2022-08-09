@@ -6,6 +6,13 @@ use function Differ\Formatters\getFormatter;
 use function Differ\Parsers\getParser;
 use function Functional\sort;
 
+/**
+ * @param string $firstFilePath
+ * @param string $secondFilePath
+ * @param string $format
+ * @return string
+ * @throws \Exception
+ */
 function genDiff(string $firstFilePath, string $secondFilePath, string $format = 'stylish'): string
 {
     $dataFirstFile = getDataFromFile($firstFilePath);
@@ -16,6 +23,11 @@ function genDiff(string $firstFilePath, string $secondFilePath, string $format =
     return $formatter($tree);
 }
 
+/**
+ * @param string $filePath
+ * @return object
+ * @throws \Exception
+ */
 function getDataFromFile(string $filePath): object
 {
     $extension = pathinfo($filePath, PATHINFO_EXTENSION);
@@ -60,6 +72,14 @@ function buildAstTree(object $dataBefore, object $dataAfter): array
     }, $sortedKeys);
 }
 
+/**
+ * @param string $name
+ * @param string $status
+ * @param mixed|null $oldValue
+ * @param mixed|null $newValue
+ * @param array $children
+ * @return array
+ */
 function makeNode(
     string $name,
     string $status,
