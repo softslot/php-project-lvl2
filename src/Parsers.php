@@ -10,6 +10,6 @@ function getParser(string $extension): callable
     return match ($extension) {
         'json'        => fn($data) => parseJson($data),
         'yml', 'yaml' => fn($data) => parseYaml($data),
-        default       => throw new \Exception("Undefended format '{$extension}'!"),
+        default       => throw new \Exception("Undefended extension '{$extension}'!"),
     };
 }
