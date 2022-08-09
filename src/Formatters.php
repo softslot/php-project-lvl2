@@ -1,10 +1,10 @@
 <?php
 
-namespace Hexlet\Code\Formatters;
+namespace Differ\Formatters;
 
-use function Hexlet\Code\Formatters\JsonFormatter\renderJson;
-use function Hexlet\Code\Formatters\PlainFormatter\renderPlain;
-use function Hexlet\Code\Formatters\StylishFormatter\renderStylish;
+use function Differ\Formatters\JsonFormatter\renderJson;
+use function Differ\Formatters\PlainFormatter\renderPlain;
+use function Differ\Formatters\StylishFormatter\renderStylish;
 
 function getFormatter(string $format): callable
 {

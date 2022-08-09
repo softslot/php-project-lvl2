@@ -1,9 +1,9 @@
 <?php
 
-namespace Hexlet\Code\Parsers;
+namespace Differ\Parsers;
 
-use function Hexlet\Code\Parsers\JsonParser\parseJson;
-use function Hexlet\Code\Parsers\YamlParser\parseYaml;
+use function Differ\Parsers\JsonParser\parseJson;
+use function Differ\Parsers\YamlParser\parseYaml;
 
 function getParser(string $extension): callable
 {

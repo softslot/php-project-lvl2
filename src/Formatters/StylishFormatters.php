@@ -1,6 +1,6 @@
 <?php
 
-namespace Hexlet\Code\Formatters\StylishFormatter;
+namespace Differ\Formatters\StylishFormatter;
 
 const INITIAL_INDENT_LENGTH = 4;
 

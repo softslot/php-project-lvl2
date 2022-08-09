@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-use function Hexlet\Code\Differ\genDiff;
+use function Differ\Differ\genDiff;
 
 class DifferTest extends TestCase
 {

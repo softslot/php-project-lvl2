@@ -1,6 +1,6 @@
 <?php
 
-namespace Hexlet\Code\Formatters\PlainFormatter;
+namespace Differ\Formatters\PlainFormatter;
 
 use function Funct\Collection\flattenAll;
 

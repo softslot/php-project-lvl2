@@ -1,6 +1,6 @@
 <?php
 
-namespace Hexlet\Code\Formatters\JsonFormatter;
+namespace Differ\Formatters\JsonFormatter;
 
 function renderJson($data)
 {

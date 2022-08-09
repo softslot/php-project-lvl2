@@ -1,6 +1,6 @@
 <?php
 
-namespace Hexlet\Code\Parsers\JsonParser;
+namespace Differ\Parsers\JsonParser;
 
 function parseJson(string $data): object
 {
