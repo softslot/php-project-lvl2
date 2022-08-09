@@ -2,6 +2,8 @@
 
 [![Actions Status](https://github.com/softslot/php-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/softslot/php-project-lvl2/actions) [![Linter](https://github.com/softslot/php-project-lvl2/actions/workflows/lint.yml/badge.svg)](https://github.com/softslot/php-project-lvl2/actions/workflows/lint.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/dfac19731929bf10b581/maintainability)](https://codeclimate.com/github/softslot/php-project-lvl2/maintainability)
 
+### Comparison of flat files (JSON)
+
 <details>
 
 <summary>file1.json </summary>
@@ -32,6 +34,8 @@
 </details>
 
 [![asciicast](https://asciinema.org/a/vnGWrgMeWbz1NnAex9xdzbxeV.svg)](https://asciinema.org/a/vnGWrgMeWbz1NnAex9xdzbxeV)
+
+### Comparison of flat files (YAML)
 
 <details>
 
