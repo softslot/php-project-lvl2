@@ -43,24 +43,24 @@ function renderStylish(array $tree, int $depth = 0)
         switch ($node['status']) {
             case 'added':
                 $formattedValue = stringify($node['newValue'], $depth);
-                $result = rtrim("{$indent}  + {$node['name']}: {$formattedValue}");
+                $result = "{$indent}  + {$node['name']}: {$formattedValue}";
                 break;
             case 'removed':
                 $formattedValue = stringify($node['oldValue'], $depth);
-                $result = rtrim("{$indent}  - {$node['name']}: {$formattedValue}");
+                $result = "{$indent}  - {$node['name']}: {$formattedValue}";
                 break;
             case 'changed':
                 $formattedOldValue = stringify($node['oldValue'], $depth);
                 $formattedNewValue = stringify($node['newValue'], $depth);
                 $parts = [
-                    rtrim("{$indent}  - {$node['name']}: {$formattedOldValue}"),
-                    rtrim("{$indent}  + {$node['name']}: {$formattedNewValue}"),
+                    "{$indent}  - {$node['name']}: {$formattedOldValue}",
+                    "{$indent}  + {$node['name']}: {$formattedNewValue}",
                 ];
                 $result = implode("\n", $parts);
                 break;
             case 'unchanged':
                 $formattedValue = stringify($node['oldValue'], $depth);
-                $result = rtrim("{$indent}    {$node['name']}: {$formattedValue}");
+                $result = "{$indent}    {$node['name']}: {$formattedValue}";
                 break;
             case 'nested':
                 $stylishOutput = renderStylish($node['children'], $depth + 1);
