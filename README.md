@@ -1,6 +1,7 @@
-<div style="text-align: center">
+
 <h1 align="center">Difference calculator</h1>
-# Difference calculator
+
+<div align="center">
 
 [![Actions Status](https://github.com/softslot/php-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/softslot/php-project-lvl2/actions)
 [![Linter](https://github.com/softslot/php-project-lvl2/actions/workflows/lint.yml/badge.svg)](https://github.com/softslot/php-project-lvl2/actions/workflows/lint.yml)
