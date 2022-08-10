@@ -1,4 +1,4 @@
-<p align="center">
+<div style="text-align: center">
 
 # Difference calculator
 
@@ -6,7 +6,7 @@
 [![Linter](https://github.com/softslot/php-project-lvl2/actions/workflows/lint.yml/badge.svg)](https://github.com/softslot/php-project-lvl2/actions/workflows/lint.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/dfac19731929bf10b581/maintainability)](https://codeclimate.com/github/softslot/php-project-lvl2/maintainability)
 
-</p>
+</div>
 
 <hr>
 
@@ -71,3 +71,142 @@ host: hexlet.io
 </details>
 
 [![asciicast](https://asciinema.org/a/mj0eeZojQzdEeNEPHHj8wv1KL.svg)](https://asciinema.org/a/mj0eeZojQzdEeNEPHHj8wv1KL)
+
+### Recursive comparison (Json)
+
+<details>
+
+<summary>file1.json </summary>
+
+```json
+{
+  "common": {
+    "setting1": "Value 1",
+    "setting2": 200,
+    "setting3": true,
+    "setting6": {
+      "key": "value",
+      "doge": {
+        "wow": ""
+      }
+    }
+  },
+  "group1": {
+    "baz": "bas",
+    "foo": "bar",
+    "nest": {
+      "key": "value"
+    }
+  },
+  "group2": {
+    "abc": 12345,
+    "deep": {
+      "id": 45
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+
+<summary>file2.json </summary>
+
+```json
+{
+  "common": {
+    "follow": false,
+    "setting1": "Value 1",
+    "setting3": null,
+    "setting4": "blah blah",
+    "setting5": {
+      "key5": "value5"
+    },
+    "setting6": {
+      "key": "value",
+      "ops": "vops",
+      "doge": {
+        "wow": "so much"
+      }
+    }
+  },
+  "group1": {
+    "foo": "bar",
+    "baz": "bars",
+    "nest": "str"
+  },
+  "group3": {
+    "deep": {
+      "id": {
+        "number": 45
+      }
+    },
+    "fee": 100500
+  }
+}
+```
+
+</details>
+
+[![asciicast](https://asciinema.org/a/zLHSYAkdtLMROYF41uQ5e4Bwv.svg)](https://asciinema.org/a/zLHSYAkdtLMROYF41uQ5e4Bwv)
+
+### Recursive comparison (Yaml)
+
+<details>
+
+<summary>file1.yml </summary>
+
+```yaml
+common:
+  setting1: Value 1
+  setting2: 200
+  setting3: true
+  setting6:
+    key: value
+    doge:
+      wow: ''
+group1:
+  baz: bas
+  foo: bar
+  nest:
+    key: value
+group2:
+  abc: 12345
+  deep:
+    id: 45
+```
+
+</details>
+
+<details>
+
+<summary>file2.yml </summary>
+
+```yaml
+common:
+  follow: false
+  setting1: Value 1
+  setting3:
+  setting4: blah blah
+  setting5:
+    key5: value5
+  setting6:
+    key: value
+    ops: vops
+    doge:
+      wow: so much
+group1:
+  foo: bar
+  baz: bars
+  nest: str
+group3:
+  deep:
+    id:
+      number: 45
+  fee: 100500
+```
+
+</details>
+
+[![asciicast](https://asciinema.org/a/6Q7Du9SPrvhmDnVR3NKG1A1tE.svg)](https://asciinema.org/a/6Q7Du9SPrvhmDnVR3NKG1A1tE)
