@@ -1,5 +1,5 @@
 
-<h1 align="center">Difference calculator</h1>
+<h1 align="center">Differ</h1>
 
 <div align="center">
 
@@ -11,6 +11,20 @@
 </div>
 
 <hr>
+
+Description
+
+<hr>
+
+### Requirements
+<ul>
+<li>PHP 8.0+</li>
+<li>Composer 2.0</li>
+</ul>
+
+<hr>
+
+<h2 align="center">Examples</h2>
 
 ### Comparison of flat files (JSON)
 
