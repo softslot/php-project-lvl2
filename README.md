@@ -12,7 +12,13 @@
 
 <hr>
 
-Description
+Differ - is a library that defines the difference between two data structures.
+
+<strong>Utility Features:</strong>
+<ul>
+<li>Support for different input formats: yaml, json</li>
+<li>Generating a report in the form of plain text, stylish and json</li>
+</ul>
 
 <hr>
 
