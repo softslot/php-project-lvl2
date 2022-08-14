@@ -7,10 +7,6 @@ use function Differ\Parsers\getParser;
 use function Functional\sort;
 
 /**
- * @param string $firstFilePath
- * @param string $secondFilePath
- * @param string $format
- * @return string
  * @throws \Exception
  */
 function genDiff(string $firstFilePath, string $secondFilePath, string $format = 'stylish'): string
@@ -24,8 +20,6 @@ function genDiff(string $firstFilePath, string $secondFilePath, string $format =
 }
 
 /**
- * @param string $filePath
- * @return object
  * @throws \Exception
  */
 function getDataFromFile(string $filePath): object
@@ -37,11 +31,6 @@ function getDataFromFile(string $filePath): object
     return $parser($data);
 }
 
-/**
- * @param object $dataBefore
- * @param object $dataAfter
- * @return array
- */
 function buildAstTree(object $dataBefore, object $dataAfter): array
 {
     $keys = array_unique([
@@ -72,14 +61,6 @@ function buildAstTree(object $dataBefore, object $dataAfter): array
     }, $sortedKeys);
 }
 
-/**
- * @param string $name
- * @param string $status
- * @param mixed|null $oldValue
- * @param mixed|null $newValue
- * @param array $children
- * @return array
- */
 function makeNode(
     string $name,
     string $status,

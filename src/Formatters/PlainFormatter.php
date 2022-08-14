@@ -5,8 +5,6 @@ namespace Differ\Formatters\PlainFormatter;
 use function Functional\flatten;
 
 /**
- * @param mixed $value
- * @return string
  * @throws \Exception
  */
 function stringify(mixed $value): string
@@ -21,9 +19,6 @@ function stringify(mixed $value): string
 }
 
 /**
- * @param array $tree
- * @param array $propertyNames
- * @return array
  * @throws \Exception
  */
 function generatePlainOutput(array $tree, array $propertyNames): array
@@ -62,8 +57,6 @@ function generatePlainOutput(array $tree, array $propertyNames): array
 }
 
 /**
- * @param array $data
- * @return string
  * @throws \Exception
  */
 function renderPlain(array $data): string
