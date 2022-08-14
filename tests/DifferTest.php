@@ -23,37 +23,37 @@ class DifferTest extends TestCase
         $this->expectedOutputJson = file_get_contents(__DIR__ . '/fixtures/expected_output_json.txt');
     }
 
-    public function testStylishWitchJson(): void
+    public function testStylishWithJson(): void
     {
         $result = genDiff($this->filePathJson1, $this->filePathJson2);
         $this->assertEquals($this->expectedOutputStylish, $result);
     }
 
-    public function testStylishWitchYaml(): void
+    public function testStylishWithYaml(): void
     {
         $result = genDiff($this->filePathYaml1, $this->filePathYaml2);
         $this->assertEquals($this->expectedOutputStylish, $result);
     }
 
-    public function testPlainWitchJson(): void
+    public function testPlainWithJson(): void
     {
         $result = genDiff($this->filePathJson1, $this->filePathJson2, 'plain');
         $this->assertEquals($this->expectedOutputPlain, $result);
     }
 
-    public function testPlainWitchYaml(): void
+    public function testPlainWithYaml(): void
     {
         $result = genDiff($this->filePathYaml1, $this->filePathYaml2, 'plain');
         $this->assertEquals($this->expectedOutputPlain, $result);
     }
 
-    public function testJsonWitchJson(): void
+    public function testJsonWithJson(): void
     {
         $result = genDiff($this->filePathJson1, $this->filePathJson2, 'json');
         $this->assertEquals($this->expectedOutputJson, $result);
     }
 
-    public function testJsonWitchYaml(): void
+    public function testJsonWithYaml(): void
     {
         $result = genDiff($this->filePathYaml1, $this->filePathYaml2, 'json');
         $this->assertEquals($this->expectedOutputJson, $result);
