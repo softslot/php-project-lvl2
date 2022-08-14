@@ -8,19 +8,31 @@ use function Differ\Differ\genDiff;
 
 class DifferTest extends TestCase
 {
-    private string $filePathJson1 = __DIR__ . '/fixtures/first_file.json';
-    private string $filePathJson2 = __DIR__ . '/fixtures/second_file.json';
-    private string $filePathYaml1 = __DIR__ . '/fixtures/first_file.yml';
-    private string $filePathYaml2 = __DIR__ . '/fixtures/second_file.yml';
+    private const PATH_TO_FIXTURES = __DIR__ . '/fixtures';
+    private string $filePathJson1;
+    private string $filePathJson2;
+    private string $filePathYaml1;
+    private string $filePathYaml2;
     private string $expectedOutputStylish;
     private string $expectedOutputPlain;
     private string $expectedOutputJson;
 
     protected function setUp(): void
     {
-        $this->expectedOutputStylish = file_get_contents(__DIR__ . '/fixtures/expected_output_stylish.txt');
-        $this->expectedOutputPlain = file_get_contents(__DIR__ . '/fixtures/expected_output_plain.txt');
-        $this->expectedOutputJson = file_get_contents(__DIR__ . '/fixtures/expected_output_json.txt');
+        $this->filePathJson1 = self::PATH_TO_FIXTURES . '/' . 'first_file.json';
+        $this->filePathJson2 = self::PATH_TO_FIXTURES . '/' . 'second_file.json';
+        $this->filePathYaml1 = self::PATH_TO_FIXTURES . '/' . 'first_file.yml';
+        $this->filePathYaml2 = self::PATH_TO_FIXTURES . '/' . 'second_file.yml';
+
+        $this->expectedOutputStylish = file_get_contents(
+            self::PATH_TO_FIXTURES . '/' . 'expected_output_stylish.txt'
+        );
+        $this->expectedOutputPlain = file_get_contents(
+            self::PATH_TO_FIXTURES . '/' . 'expected_output_plain.txt'
+        );
+        $this->expectedOutputJson = file_get_contents(
+            self::PATH_TO_FIXTURES . '/' . 'expected_output_json.txt'
+        );
     }
 
     public function testStylishWithJson(): void
