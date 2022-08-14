@@ -30,6 +30,15 @@ Differ - is a library that defines the difference between two data structures.
 
 <hr>
 
+### Setup
+```sh
+$ git clone https://github.com/softslot/php-project-lvl2.git
+
+$ make install
+```
+
+<hr>
+
 <h2 align="center">Examples</h2>
 
 ### Comparison of flat files (JSON)
