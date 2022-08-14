@@ -25,7 +25,7 @@ function generatePlainOutput(array $tree, array $propertyNames): array
 {
     $output = array_map(function ($child) use ($propertyNames): string|array {
         $name = implode('.', [...$propertyNames, $child['name']]);
-        switch ($child['status']) {
+        switch ($child['type']) {
             case 'added':
                 $value = stringify($child['newValue']);
                 $result = "Property '{$name}' was added with value: {$value}";
@@ -45,7 +45,7 @@ function generatePlainOutput(array $tree, array $propertyNames): array
                 $result = generatePlainOutput($child['children'], [...$propertyNames, $child['name']]);
                 break;
             default:
-                throw new \Exception("Invalid node status: {$child['status']}");
+                throw new \Exception("Invalid node type: {$child['type']}");
         }
 
         return $result;

@@ -63,14 +63,14 @@ function buildAstTree(object $dataBefore, object $dataAfter): array
 
 function makeNode(
     string $name,
-    string $status,
+    string $type,
     mixed $oldValue = null,
     mixed $newValue = null,
     array $children = []
 ): array {
     return [
         'name'     => $name,
-        'status'   => $status,
+        'type'     => $type,
         'oldValue' => $oldValue,
         'newValue' => $newValue,
         'children' => $children,

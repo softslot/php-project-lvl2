@@ -1,48 +1,48 @@
 [
     {
         "name": "common",
-        "status": "nested",
+        "type": "nested",
         "oldValue": null,
         "newValue": null,
         "children": [
             {
                 "name": "follow",
-                "status": "added",
+                "type": "added",
                 "oldValue": null,
                 "newValue": false,
                 "children": []
             },
             {
                 "name": "setting1",
-                "status": "unchanged",
+                "type": "unchanged",
                 "oldValue": "Value 1",
                 "newValue": null,
                 "children": []
             },
             {
                 "name": "setting2",
-                "status": "removed",
+                "type": "removed",
                 "oldValue": 200,
                 "newValue": null,
                 "children": []
             },
             {
                 "name": "setting3",
-                "status": "changed",
+                "type": "changed",
                 "oldValue": true,
                 "newValue": null,
                 "children": []
             },
             {
                 "name": "setting4",
-                "status": "added",
+                "type": "added",
                 "oldValue": null,
                 "newValue": "blah blah",
                 "children": []
             },
             {
                 "name": "setting5",
-                "status": "added",
+                "type": "added",
                 "oldValue": null,
                 "newValue": {
                     "key5": "value5"
@@ -51,19 +51,19 @@
             },
             {
                 "name": "setting6",
-                "status": "nested",
+                "type": "nested",
                 "oldValue": null,
                 "newValue": null,
                 "children": [
                     {
                         "name": "doge",
-                        "status": "nested",
+                        "type": "nested",
                         "oldValue": null,
                         "newValue": null,
                         "children": [
                             {
                                 "name": "wow",
-                                "status": "changed",
+                                "type": "changed",
                                 "oldValue": "",
                                 "newValue": "so much",
                                 "children": []
@@ -72,14 +72,14 @@
                     },
                     {
                         "name": "key",
-                        "status": "unchanged",
+                        "type": "unchanged",
                         "oldValue": "value",
                         "newValue": null,
                         "children": []
                     },
                     {
                         "name": "ops",
-                        "status": "added",
+                        "type": "added",
                         "oldValue": null,
                         "newValue": "vops",
                         "children": []
@@ -90,27 +90,27 @@
     },
     {
         "name": "group1",
-        "status": "nested",
+        "type": "nested",
         "oldValue": null,
         "newValue": null,
         "children": [
             {
                 "name": "baz",
-                "status": "changed",
+                "type": "changed",
                 "oldValue": "bas",
                 "newValue": "bars",
                 "children": []
             },
             {
                 "name": "foo",
-                "status": "unchanged",
+                "type": "unchanged",
                 "oldValue": "bar",
                 "newValue": null,
                 "children": []
             },
             {
                 "name": "nest",
-                "status": "changed",
+                "type": "changed",
                 "oldValue": {
                     "key": "value"
                 },
@@ -121,7 +121,7 @@
     },
     {
         "name": "group2",
-        "status": "removed",
+        "type": "removed",
         "oldValue": {
             "abc": 12345,
             "deep": {
@@ -133,7 +133,7 @@
     },
     {
         "name": "group3",
-        "status": "added",
+        "type": "added",
         "oldValue": null,
         "newValue": {
             "deep": {

@@ -49,7 +49,7 @@ function renderStylish(array $tree, int $depth = 0): string
     $indent = getIndent($depth);
 
     $fn = function ($node) use ($depth, $indent): string {
-        switch ($node['status']) {
+        switch ($node['type']) {
             case 'added':
                 $formattedValue = stringify($node['newValue'], $depth);
                 $result = "{$indent}  + {$node['name']}: {$formattedValue}";
@@ -76,7 +76,7 @@ function renderStylish(array $tree, int $depth = 0): string
                 $result = rtrim("{$indent}    {$node['name']}: {$stylishOutput}");
                 break;
             default:
-                throw new \RuntimeException("Unknown node status '{$node['status']}'!");
+                throw new \RuntimeException("Unknown node type '{$node['type']}'!");
         }
 
         return $result;
