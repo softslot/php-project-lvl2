@@ -9,65 +9,33 @@ use function Differ\Differ\genDiff;
 class DifferTest extends TestCase
 {
     private const PATH_TO_FIXTURES = __DIR__ . '/fixtures';
-    private string $filePathJson1;
-    private string $filePathJson2;
-    private string $filePathYaml1;
-    private string $filePathYaml2;
-    private string $expectedOutputStylish;
-    private string $expectedOutputPlain;
-    private string $expectedOutputJson;
 
-    protected function setUp(): void
+    /**
+     * @dataProvider differProvider
+     * @throws \Exception
+     */
+    public function testDiffer(string $fileName1, string $fileName2, string $format, string $expected): void
     {
-        $this->filePathJson1 = self::PATH_TO_FIXTURES . '/' . 'first_file.json';
-        $this->filePathJson2 = self::PATH_TO_FIXTURES . '/' . 'second_file.json';
-        $this->filePathYaml1 = self::PATH_TO_FIXTURES . '/' . 'first_file.yml';
-        $this->filePathYaml2 = self::PATH_TO_FIXTURES . '/' . 'second_file.yml';
+        $result = genDiff($this->getFullPath($fileName1), $this->getFullPath($fileName2), $format);
+        $expectedDiff = $this->getFullPath($expected);
 
-        $this->expectedOutputStylish = file_get_contents(
-            self::PATH_TO_FIXTURES . '/' . 'expected_output_stylish.txt'
-        );
-        $this->expectedOutputPlain = file_get_contents(
-            self::PATH_TO_FIXTURES . '/' . 'expected_output_plain.txt'
-        );
-        $this->expectedOutputJson = file_get_contents(
-            self::PATH_TO_FIXTURES . '/' . 'expected_output_json.txt'
-        );
+        $this->assertStringEqualsFile($expectedDiff, $result);
     }
 
-    public function testStylishWithJson(): void
+    public function differProvider(): array
     {
-        $result = genDiff($this->filePathJson1, $this->filePathJson2);
-        $this->assertEquals($this->expectedOutputStylish, $result);
+        return [
+            ['first_file.json', 'second_file.json', 'stylish' , 'expected_output_stylish.txt'],
+            ['first_file.yml', 'second_file.yml', 'stylish' , 'expected_output_stylish.txt'],
+            ['first_file.json', 'second_file.json', 'plain', 'expected_output_plain.txt'],
+            ['first_file.yml', 'second_file.yml', 'plain', 'expected_output_plain.txt'],
+            ['first_file.json', 'second_file.json', 'json', 'expected_output_json.txt'],
+            ['first_file.yml', 'second_file.yml', 'json', 'expected_output_json.txt'],
+        ];
     }
 
-    public function testStylishWithYaml(): void
+    private function getFullPath(string $fileName): string
     {
-        $result = genDiff($this->filePathYaml1, $this->filePathYaml2);
-        $this->assertEquals($this->expectedOutputStylish, $result);
-    }
-
-    public function testPlainWithJson(): void
-    {
-        $result = genDiff($this->filePathJson1, $this->filePathJson2, 'plain');
-        $this->assertEquals($this->expectedOutputPlain, $result);
-    }
-
-    public function testPlainWithYaml(): void
-    {
-        $result = genDiff($this->filePathYaml1, $this->filePathYaml2, 'plain');
-        $this->assertEquals($this->expectedOutputPlain, $result);
-    }
-
-    public function testJsonWithJson(): void
-    {
-        $result = genDiff($this->filePathJson1, $this->filePathJson2, 'json');
-        $this->assertEquals($this->expectedOutputJson, $result);
-    }
-
-    public function testJsonWithYaml(): void
-    {
-        $result = genDiff($this->filePathYaml1, $this->filePathYaml2, 'json');
-        $this->assertEquals($this->expectedOutputJson, $result);
+        return self::PATH_TO_FIXTURES . '/' . $fileName;
     }
 }
