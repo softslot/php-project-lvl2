@@ -14,7 +14,7 @@ function stringify(mixed $value): string
         'NULL' => 'null',
         'string', 'boolean', 'integer', 'double' => var_export($value, true),
         'object', 'array' => '[complex value]',
-        default => throw new \Exception("Invalid value type '{$valueType}'!"),
+        default => throw new \Exception("Invalid value type: '{$valueType}'"),
     };
 }
 
@@ -45,7 +45,7 @@ function generatePlainOutput(array $tree, array $propertyNames): array
                 $result = generatePlainOutput($child['children'], [...$propertyNames, $child['name']]);
                 break;
             default:
-                throw new \Exception("Invalid node type: {$child['type']}");
+                throw new \Exception("Invalid node type: '{$child['type']}'");
         }
 
         return $result;

@@ -26,6 +26,10 @@ function getDataFromFile(string $filePath): object
     $extension = pathinfo($filePath, PATHINFO_EXTENSION);
     $data = file_get_contents($filePath);
 
+    if ($data === false) {
+        throw new \Exception("File not found: {$filePath}");
+    }
+
     return parse($extension, $data);
 }
 

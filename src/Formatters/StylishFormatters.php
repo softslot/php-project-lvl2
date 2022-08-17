@@ -20,7 +20,7 @@ function stringify(mixed $value, int $depth): mixed
         'NULL' => 'null',
         'boolean', 'integer', 'double' => var_export($value, true),
         'object', 'array' => stringifyComplexValue($value, $depth + 1),
-        default => throw new \Exception("Invalid value type '{$valueType}'!"),
+        default => throw new \Exception("Invalid value type: '{$valueType}'"),
     };
 }
 
@@ -76,7 +76,7 @@ function renderStylish(array $tree, int $depth = 0): string
                 $result = rtrim("{$indent}    {$node['name']}: {$stylishOutput}");
                 break;
             default:
-                throw new \RuntimeException("Unknown node type '{$node['type']}'!");
+                throw new \RuntimeException("Unknown node type: '{$node['type']}'");
         }
 
         return $result;

@@ -12,6 +12,6 @@ function format(string $format, array $data): string
         'json'    => renderJson($data),
         'plain'   => renderPlain($data),
         'stylish' => renderStylish($data),
-        default   => throw new \Exception("Undefended format '{$format}'!"),
+        default   => throw new \Exception("Undefended format: '{$format}'"),
     };
 }
