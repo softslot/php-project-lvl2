@@ -28,27 +28,20 @@ function generatePlainOutput(array $tree, array $propertyNames): array
         switch ($child['type']) {
             case 'added':
                 $value = stringify($child['newValue']);
-                $result = "Property '{$name}' was added with value: {$value}";
-                break;
+                return "Property '{$name}' was added with value: {$value}";
             case 'removed':
-                $result = "Property '{$name}' was removed";
-                break;
+                return "Property '{$name}' was removed";
             case 'changed':
                 $oldValue = stringify($child['oldValue']);
                 $newValue = stringify($child['newValue']);
-                $result = "Property '{$name}' was updated. From {$oldValue} to {$newValue}";
-                break;
+                return "Property '{$name}' was updated. From {$oldValue} to {$newValue}";
             case 'unchanged':
-                $result = "";
-                break;
+                return "";
             case 'nested':
-                $result = generatePlainOutput($child['children'], [...$propertyNames, $child['name']]);
-                break;
+                return generatePlainOutput($child['children'], [...$propertyNames, $child['name']]);
             default:
                 throw new \Exception("Invalid node type: '{$child['type']}'");
         }
-
-        return $result;
     }, $tree);
 
     $filteredOutput = array_filter($output);

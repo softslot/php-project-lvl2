@@ -52,12 +52,10 @@ function renderStylish(array $tree, int $depth = 0): string
         switch ($node['type']) {
             case 'added':
                 $formattedValue = stringify($node['newValue'], $depth);
-                $result = "{$indent}  + {$node['name']}: {$formattedValue}";
-                break;
+                return "{$indent}  + {$node['name']}: {$formattedValue}";
             case 'removed':
                 $formattedValue = stringify($node['oldValue'], $depth);
-                $result = "{$indent}  - {$node['name']}: {$formattedValue}";
-                break;
+                return "{$indent}  - {$node['name']}: {$formattedValue}";
             case 'changed':
                 $formattedOldValue = stringify($node['oldValue'], $depth);
                 $formattedNewValue = stringify($node['newValue'], $depth);
@@ -65,21 +63,16 @@ function renderStylish(array $tree, int $depth = 0): string
                     "{$indent}  - {$node['name']}: {$formattedOldValue}",
                     "{$indent}  + {$node['name']}: {$formattedNewValue}",
                 ];
-                $result = implode("\n", $parts);
-                break;
+                return implode("\n", $parts);
             case 'unchanged':
                 $formattedValue = stringify($node['oldValue'], $depth);
-                $result = "{$indent}    {$node['name']}: {$formattedValue}";
-                break;
+                return "{$indent}    {$node['name']}: {$formattedValue}";
             case 'nested':
                 $stylishOutput = renderStylish($node['children'], $depth + 1);
-                $result = rtrim("{$indent}    {$node['name']}: {$stylishOutput}");
-                break;
+                return rtrim("{$indent}    {$node['name']}: {$stylishOutput}");
             default:
                 throw new \RuntimeException("Unknown node type: '{$node['type']}'");
         }
-
-        return $result;
     };
 
     return implode("\n", ["{", ...array_map($fn, $tree), "{$indent}}"]);
