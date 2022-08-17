@@ -2,8 +2,8 @@
 
 namespace Differ\Differ;
 
-use function Differ\Formatters\getFormatter;
-use function Differ\Parsers\getParser;
+use function Differ\Formatters\format;
+use function Differ\Parsers\parse;
 use function Functional\sort;
 
 /**
@@ -14,9 +14,8 @@ function genDiff(string $firstFilePath, string $secondFilePath, string $format =
     $dataFirstFile = getDataFromFile($firstFilePath);
     $dataSecondFile = getDataFromFile($secondFilePath);
     $tree = buildAstTree($dataFirstFile, $dataSecondFile);
-    $formatter = getFormatter($format);
 
-    return $formatter($tree);
+    return format($format, $tree);
 }
 
 /**
@@ -26,9 +25,8 @@ function getDataFromFile(string $filePath): object
 {
     $extension = pathinfo($filePath, PATHINFO_EXTENSION);
     $data = file_get_contents($filePath);
-    $parser = getParser($extension);
 
-    return $parser($data);
+    return parse($extension, $data);
 }
 
 function buildAstTree(object $dataBefore, object $dataAfter): array
