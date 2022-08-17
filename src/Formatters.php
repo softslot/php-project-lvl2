@@ -6,6 +6,9 @@ use function Differ\Formatters\JsonFormatter\renderJson;
 use function Differ\Formatters\PlainFormatter\renderPlain;
 use function Differ\Formatters\StylishFormatter\renderStylish;
 
+/**
+ * @throws \Exception
+ */
 function format(string $format, array $data): string
 {
     return match ($format) {

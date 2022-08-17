@@ -5,6 +5,9 @@ namespace Differ\Parsers;
 use function Differ\Parsers\JsonParser\parseJson;
 use function Differ\Parsers\YamlParser\parseYaml;
 
+/**
+ * @throws \Exception
+ */
 function parse(string $extension, string $data): object
 {
     return match ($extension) {
