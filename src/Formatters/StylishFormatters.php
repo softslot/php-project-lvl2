@@ -33,12 +33,12 @@ function stringifyComplexValue(mixed $complexValue, int $depth): string
 
     $indent = getIndent($depth);
 
-    $stringifiedValue = array_map(function ($value, $key) use ($depth, $indent) {
+    $stringifyValue = array_map(static function ($value, $key) use ($depth, $indent) {
         $formattedValue = stringify($value, $depth);
         return "{$indent}    {$key}: {$formattedValue}";
     }, $normalizedValue, array_keys($normalizedValue));
 
-    return implode("\n", ["{", ...$stringifiedValue, "{$indent}}"]);
+    return implode("\n", ["{", ...$stringifyValue, "{$indent}}"]);
 }
 
 /**
@@ -48,31 +48,24 @@ function renderStylish(array $tree, int $depth = 0): string
 {
     $indent = getIndent($depth);
 
-    $fn = function ($node) use ($depth, $indent): string {
-        switch ($node['type']) {
-            case 'added':
-                $formattedValue = stringify($node['newValue'], $depth);
-                return "{$indent}  + {$node['name']}: {$formattedValue}";
-            case 'removed':
-                $formattedValue = stringify($node['oldValue'], $depth);
-                return "{$indent}  - {$node['name']}: {$formattedValue}";
-            case 'changed':
-                $formattedOldValue = stringify($node['oldValue'], $depth);
-                $formattedNewValue = stringify($node['newValue'], $depth);
-                $parts = [
-                    "{$indent}  - {$node['name']}: {$formattedOldValue}",
-                    "{$indent}  + {$node['name']}: {$formattedNewValue}",
-                ];
-                return implode("\n", $parts);
-            case 'unchanged':
-                $formattedValue = stringify($node['oldValue'], $depth);
-                return "{$indent}    {$node['name']}: {$formattedValue}";
-            case 'nested':
-                $stylishOutput = renderStylish($node['children'], $depth + 1);
-                return rtrim("{$indent}    {$node['name']}: {$stylishOutput}");
-            default:
-                throw new \RuntimeException("Unknown node type: '{$node['type']}'");
-        }
+    $fn = static function ($node) use ($depth, $indent): string {
+        $name = $node['name'];
+        $type = $node['type'];
+        $stringifyOldValue = stringify($node['oldValue'], $depth);
+        $stringifyNewValue = stringify($node['newValue'], $depth);
+        $stylishOutput = renderStylish($node['children'], $depth + 1);
+
+        return match ($node['type']) {
+            'added'     => "{$indent}  + {$name}: {$stringifyNewValue}",
+            'removed'   => "{$indent}  - {$name}: {$stringifyOldValue}",
+            'changed'   => implode("\n", [
+                "{$indent}  - {$name}: {$stringifyOldValue}",
+                "{$indent}  + {$name}: {$stringifyNewValue}",
+            ]),
+            'unchanged' => "{$indent}    {$name}: {$stringifyOldValue}",
+            'nested'    => rtrim("{$indent}    {$name}: {$stylishOutput}"),
+            default     => throw new \RuntimeException("Unknown node type: '{$type}'"),
+        };
     };
 
     return implode("\n", ["{", ...array_map($fn, $tree), "{$indent}}"]);

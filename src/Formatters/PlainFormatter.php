@@ -23,7 +23,7 @@ function stringify(mixed $value): string
  */
 function generatePlainOutput(array $tree, array $propertyNames): array
 {
-    $output = array_map(function ($child) use ($propertyNames): string|array {
+    $output = array_map(static function ($child) use ($propertyNames): string|array {
         $name = implode('.', [...$propertyNames, $child['name']]);
         $stringifyOldValue = stringify($child['oldValue']);
         $stringifyNewValue = stringify($child['newValue']);
