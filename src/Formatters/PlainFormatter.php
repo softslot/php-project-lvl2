@@ -7,15 +7,9 @@ use function Functional\flatten;
 /**
  * @throws \Exception
  */
-function stringify(mixed $value): string
+function renderPlain(array $data): string
 {
-    $valueType = gettype($value);
-    return match ($valueType) {
-        'NULL' => 'null',
-        'string', 'boolean', 'integer', 'double' => var_export($value, true),
-        'object', 'array' => '[complex value]',
-        default => throw new \Exception("Invalid value type: '{$valueType}'"),
-    };
+    return implode("\n", generatePlainOutput($data, []));
 }
 
 /**
@@ -46,7 +40,13 @@ function generatePlainOutput(array $tree, array $propertyNames): array
 /**
  * @throws \Exception
  */
-function renderPlain(array $data): string
+function stringify(mixed $value): string
 {
-    return implode("\n", generatePlainOutput($data, []));
+    $valueType = gettype($value);
+    return match ($valueType) {
+        'NULL' => 'null',
+        'string', 'boolean', 'integer', 'double' => var_export($value, true),
+        'object', 'array' => '[complex value]',
+        default => throw new \Exception("Invalid value type: '{$valueType}'"),
+    };
 }
