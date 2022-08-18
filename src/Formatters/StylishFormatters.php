@@ -46,27 +46,33 @@ function stringifyComplexValue(mixed $complexValue, int $depth): string
  */
 function renderStylish(array $tree, int $depth = 0): string
 {
+    $strings = array_map(static fn ($node) => renderNode($node, $depth), $tree);
     $indent = getIndent($depth);
 
-    $fn = static function ($node) use ($depth, $indent): string {
-        $name = $node['name'];
-        $type = $node['type'];
-        $stringifyOldValue = stringify($node['oldValue'], $depth);
-        $stringifyNewValue = stringify($node['newValue'], $depth);
-        $stylishOutput = renderStylish($node['children'], $depth + 1);
+    return implode("\n", ["{", ...$strings, "{$indent}}"]);
+}
 
-        return match ($node['type']) {
-            'added'     => "{$indent}  + {$name}: {$stringifyNewValue}",
-            'removed'   => "{$indent}  - {$name}: {$stringifyOldValue}",
-            'changed'   => implode("\n", [
-                "{$indent}  - {$name}: {$stringifyOldValue}",
-                "{$indent}  + {$name}: {$stringifyNewValue}",
-            ]),
-            'unchanged' => "{$indent}    {$name}: {$stringifyOldValue}",
-            'nested'    => rtrim("{$indent}    {$name}: {$stylishOutput}"),
-            default     => throw new \RuntimeException("Unknown node type: '{$type}'"),
-        };
+/**
+ * @throws \Exception
+ */
+function renderNode(array $node, int $depth = 0): string
+{
+    $indent = getIndent($depth);
+    $name = $node['name'];
+    $type = $node['type'];
+    $stringifyOldValue = stringify($node['oldValue'], $depth);
+    $stringifyNewValue = stringify($node['newValue'], $depth);
+    $stylishOutput = renderStylish($node['children'], $depth + 1);
+
+    return match ($node['type']) {
+        'added'     => "{$indent}  + {$name}: {$stringifyNewValue}",
+        'removed'   => "{$indent}  - {$name}: {$stringifyOldValue}",
+        'changed'   => implode("\n", [
+            "{$indent}  - {$name}: {$stringifyOldValue}",
+            "{$indent}  + {$name}: {$stringifyNewValue}",
+        ]),
+        'unchanged' => "{$indent}    {$name}: {$stringifyOldValue}",
+        'nested'    => rtrim("{$indent}    {$name}: {$stylishOutput}"),
+        default     => throw new \RuntimeException("Unknown node type: '{$type}'"),
     };
-
-    return implode("\n", ["{", ...array_map($fn, $tree), "{$indent}}"]);
 }
