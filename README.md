@@ -72,7 +72,7 @@ $ make install
 
 </details>
 
-[![asciicast](https://asciinema.org/a/vnGWrgMeWbz1NnAex9xdzbxeV.svg)](https://asciinema.org/a/vnGWrgMeWbz1NnAex9xdzbxeV)
+[![asciicast](https://asciinema.org/a/j578iszWaf5k9SwOm6LMf7dXT.svg)](https://asciinema.org/a/j578iszWaf5k9SwOm6LMf7dXT)
 
 ### Comparison of flat files (YAML)
 
@@ -101,7 +101,7 @@ host: hexlet.io
 
 </details>
 
-[![asciicast](https://asciinema.org/a/mj0eeZojQzdEeNEPHHj8wv1KL.svg)](https://asciinema.org/a/mj0eeZojQzdEeNEPHHj8wv1KL)
+[![asciicast](https://asciinema.org/a/nZZI86hWQYvgTRsYKcM0xHS9H.svg)](https://asciinema.org/a/nZZI86hWQYvgTRsYKcM0xHS9H)
 
 ### Recursive comparison (Json)
 
