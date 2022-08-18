@@ -9,7 +9,7 @@ use function Differ\Formatters\StylishFormatter\renderStylish;
 /**
  * @throws \Exception
  */
-function format(string $format, array $data): string
+function format(array $data, string $format): string
 {
     return match ($format) {
         'json'    => renderJson($data),

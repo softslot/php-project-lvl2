@@ -11,26 +11,29 @@ use function Functional\sort;
  */
 function genDiff(string $firstFilePath, string $secondFilePath, string $format = 'stylish'): string
 {
-    $dataFirstFile = getDataFromFile($firstFilePath);
-    $dataSecondFile = getDataFromFile($secondFilePath);
+    $dataFirstFile = parse(getDataFromFile($firstFilePath), getFileExtension($firstFilePath));
+    $dataSecondFile = parse(getDataFromFile($secondFilePath), getFileExtension($secondFilePath));
     $tree = buildAstTree($dataFirstFile, $dataSecondFile);
 
-    return format($format, $tree);
+    return format($tree, $format);
 }
 
 /**
  * @throws \Exception
  */
-function getDataFromFile(string $filePath): object
+function getDataFromFile(string $filePath): string
 {
     $data = file_get_contents($filePath);
     if ($data === false) {
         throw new \Exception("File not found: {$filePath}");
     }
 
-    $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+    return $data;
+}
 
-    return parse($extension, $data);
+function getFileExtension(string $filePath): string
+{
+    return pathinfo($filePath, PATHINFO_EXTENSION);
 }
 
 function buildAstTree(object $dataBefore, object $dataAfter): array
@@ -42,7 +45,7 @@ function buildAstTree(object $dataBefore, object $dataAfter): array
 
     $sortedKeys = sort($keys, fn ($left, $right) => strcmp($left, $right));
 
-    return array_map(function ($key) use ($dataBefore, $dataAfter) {
+    return array_map(static function ($key) use ($dataBefore, $dataAfter) {
         if (!property_exists($dataBefore, $key)) {
             return makeNode($key, 'added', newValue: $dataAfter->$key);
         }

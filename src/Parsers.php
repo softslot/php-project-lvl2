@@ -8,7 +8,7 @@ use function Differ\Parsers\YamlParser\parseYaml;
 /**
  * @throws \Exception
  */
-function parse(string $extension, string $data): object
+function parse(string $data, string $extension): object
 {
     return match ($extension) {
         'json'        => parseJson($data),
