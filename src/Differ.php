@@ -46,8 +46,8 @@ function buildAstTree(object $dataBefore, object $dataAfter): array
     $sortedKeys = sort($keys, fn ($left, $right) => strcmp($left, $right));
 
     return array_map(static function ($key) use ($dataBefore, $dataAfter) {
-        $oldValue = $dataBefore->$key;
-        $newValue = $dataAfter->$key;
+        $oldValue = $dataBefore->$key ?? null;
+        $newValue = $dataAfter->$key ?? null;
         if (!property_exists($dataBefore, $key)) {
             return makeNode($key, 'added', newValue: $newValue);
         }
