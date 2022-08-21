@@ -8,7 +8,7 @@ use function Differ\Differ\genDiff;
 
 class DifferTest extends TestCase
 {
-    private const PATH_TO_FIXTURES = __DIR__ . '/fixtures';
+    private const FIXTURES_FOLDER = __DIR__ . '/fixtures';
 
     /**
      * @dataProvider differProvider
@@ -16,8 +16,8 @@ class DifferTest extends TestCase
      */
     public function testDiffer(string $fileName1, string $fileName2, string $format, string $expected): void
     {
-        $result = genDiff($this->getFullPath($fileName1), $this->getFullPath($fileName2), $format);
-        $expectedDiff = $this->getFullPath($expected);
+        $result = genDiff($this->getPathToFixtures($fileName1), $this->getPathToFixtures($fileName2), $format);
+        $expectedDiff = $this->getPathToFixtures($expected);
 
         $this->assertStringEqualsFile($expectedDiff, $result);
     }
@@ -34,8 +34,8 @@ class DifferTest extends TestCase
         ];
     }
 
-    private function getFullPath(string $fileName): string
+    private function getPathToFixtures(string $fileName): string
     {
-        return self::PATH_TO_FIXTURES . '/' . $fileName;
+        return self::FIXTURES_FOLDER . '/' . $fileName;
     }
 }
