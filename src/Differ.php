@@ -46,23 +46,25 @@ function buildAstTree(object $dataBefore, object $dataAfter): array
     $sortedKeys = sort($keys, fn ($left, $right) => strcmp($left, $right));
 
     return array_map(static function ($key) use ($dataBefore, $dataAfter) {
+        $oldValue = $dataBefore->$key;
+        $newValue = $dataAfter->$key;
         if (!property_exists($dataBefore, $key)) {
-            return makeNode($key, 'added', newValue: $dataAfter->$key);
+            return makeNode($key, 'added', newValue: $newValue);
         }
 
         if (!property_exists($dataAfter, $key)) {
-            return makeNode($key, 'removed', oldValue: $dataBefore->$key);
+            return makeNode($key, 'removed', oldValue: $oldValue);
         }
 
-        if (is_object($dataBefore->$key) && is_object($dataAfter->$key)) {
-            return makeNode($key, 'nested', children: buildAstTree($dataBefore->$key, $dataAfter->$key));
+        if (is_object($oldValue) && is_object($newValue)) {
+            return makeNode($key, 'nested', children: buildAstTree($oldValue, $newValue));
         }
 
-        if ($dataBefore->$key === $dataAfter->$key) {
-            return makeNode($key, 'unchanged', $dataBefore->$key);
+        if ($oldValue === $newValue) {
+            return makeNode($key, 'unchanged', $oldValue);
         }
 
-        return makeNode($key, 'changed', $dataBefore->$key, $dataAfter->$key);
+        return makeNode($key, 'changed', $oldValue, $newValue);
     }, $sortedKeys);
 }
 
