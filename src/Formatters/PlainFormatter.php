@@ -7,7 +7,7 @@ use function Functional\flatten;
 /**
  * @throws \Exception
  */
-function renderPlain(array $data): string
+function render(array $data): string
 {
     return implode("\n", generatePlainOutput($data, []));
 }

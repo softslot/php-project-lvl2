@@ -2,8 +2,8 @@
 
 namespace Differ\Parsers;
 
-use function Differ\Parsers\JsonParser\parseJson;
-use function Differ\Parsers\YamlParser\parseYaml;
+use function Differ\Parsers\JsonParser\parse as parseJson;
+use function Differ\Parsers\YamlParser\parse as parseYaml;
 
 /**
  * @throws \Exception

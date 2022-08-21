@@ -2,9 +2,9 @@
 
 namespace Differ\Formatters;
 
-use function Differ\Formatters\JsonFormatter\renderJson;
-use function Differ\Formatters\PlainFormatter\renderPlain;
-use function Differ\Formatters\StylishFormatter\renderStylish;
+use function Differ\Formatters\JsonFormatter\render as renderJson;
+use function Differ\Formatters\PlainFormatter\render as renderPlain;
+use function Differ\Formatters\StylishFormatter\render as renderStylish;
 
 /**
  * @throws \Exception

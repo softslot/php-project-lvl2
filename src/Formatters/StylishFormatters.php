@@ -7,7 +7,7 @@ const INITIAL_INDENT_LENGTH = 4;
 /**
  * @throws \Exception
  */
-function renderStylish(array $tree, int $depth = 0): string
+function render(array $tree, int $depth = 0): string
 {
     $strings = array_map(static fn ($node) => generateStylishOutput($node, $depth), $tree);
     $indent = getIndent($depth);
@@ -25,7 +25,7 @@ function generateStylishOutput(array $node, int $depth = 0): string
     $type = $node['type'];
     $stringifyOldValue = stringify($node['oldValue'], $depth);
     $stringifyNewValue = stringify($node['newValue'], $depth);
-    $stylishOutput = renderStylish($node['children'], $depth + 1);
+    $stylishOutput = render($node['children'], $depth + 1);
 
     return match ($node['type']) {
         'added'     => "{$indent}  + {$name}: {$stringifyNewValue}",
