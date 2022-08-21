@@ -13,8 +13,6 @@
             "src/Cli.php",
             "src/Differ.php",
             "src/Parsers.php",
-            "src/Parsers/JsonParser.php",
-            "src/Parsers/YamlParser.php",
             "src/Formatters.php",
             "src/Formatters/JsonFormatter.php",
             "src/Formatters/StylishFormatters.php",
