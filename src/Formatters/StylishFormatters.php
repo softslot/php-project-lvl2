@@ -12,7 +12,7 @@ function render(array $tree, int $depth = 0): string
     $strings = array_map(static fn ($node) => generateStylishOutput($node, $depth), $tree);
     $indent = getIndent($depth);
 
-    return implode("\n", ["{", ...$strings, "{$indent}}"]);
+    return implode("\n", ["{", ...$strings, "{$indent}}"]) . "";
 }
 
 /**

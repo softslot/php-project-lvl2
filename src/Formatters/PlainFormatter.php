@@ -9,7 +9,7 @@ use function Functional\flatten;
  */
 function render(array $data): string
 {
-    return implode("\n", generatePlainOutput($data, []));
+    return implode("\n", generatePlainOutput($data, [])) . "";
 }
 
 /**
