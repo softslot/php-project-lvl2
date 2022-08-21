@@ -30,5 +30,5 @@ function run(): string
     $args = Docopt::handle($doc, array('version' => '1.0.0'));
     $diff = genDiff($args['<firstFile>'], $args['<secondFile>'], $args['--format']);
 
-    return "{$diff}\n";
+    return "{$diff}";
 }
