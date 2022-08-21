@@ -19,13 +19,13 @@ function generatePlainOutput(array $tree, array $propertyNames): array
 {
     $output = array_map(static function ($child) use ($propertyNames): string|array {
         $name = implode('.', [...$propertyNames, $child['name']]);
-        $stringifyOldValue = stringify($child['oldValue']);
-        $stringifyNewValue = stringify($child['newValue']);
+        $stringifiedOldValue = stringify($child['oldValue']);
+        $stringifiedNewValue = stringify($child['newValue']);
 
         return match ($child['type']) {
-            'added'     => "Property '{$name}' was added with value: {$stringifyNewValue}",
+            'added'     => "Property '{$name}' was added with value: {$stringifiedNewValue}",
             'removed'   => "Property '{$name}' was removed",
-            'changed'   => "Property '{$name}' was updated. From {$stringifyOldValue} to {$stringifyNewValue}",
+            'changed'   => "Property '{$name}' was updated. From {$stringifiedOldValue} to {$stringifiedNewValue}",
             'unchanged' => '',
             'nested'    => generatePlainOutput($child['children'], [...$propertyNames, $child['name']]),
             default     => throw new \Exception("Invalid node type: '{$child['type']}'"),
