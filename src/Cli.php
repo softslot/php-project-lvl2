@@ -11,6 +11,9 @@ use function Differ\Differ\genDiff;
  */
 function run(): string
 {
+
+//    return "HELLO\n";
+
     $doc = <<<DOC
 
     Generate diff
@@ -28,7 +31,5 @@ function run(): string
     DOC;
 
     $args = Docopt::handle($doc, array('version' => '1.0.0'));
-    $diff = genDiff($args['<firstFile>'], $args['<secondFile>'], $args['--format']);
-
-    return "{$diff}";
+    return genDiff($args['<firstFile>'], $args['<secondFile>'], $args['--format']);
 }

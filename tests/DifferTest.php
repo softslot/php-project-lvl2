@@ -8,16 +8,14 @@ use function Differ\Differ\genDiff;
 
 class DifferTest extends TestCase
 {
-    private const FIXTURES_FOLDER = __DIR__ . '/fixtures';
-
     /**
      * @dataProvider differProvider
      * @throws \Exception
      */
     public function testDiffer(string $fileName1, string $fileName2, string $format, string $expected): void
     {
-        $result = genDiff($this->getPathToFixtures($fileName1), $this->getPathToFixtures($fileName2), $format);
-        $expectedDiff = $this->getPathToFixtures($expected);
+        $result = genDiff($this->getFixtureFullPath($fileName1), $this->getFixtureFullPath($fileName2), $format);
+        $expectedDiff = $this->getFixtureFullPath($expected);
 
         $this->assertStringEqualsFile($expectedDiff, $result);
     }
@@ -34,8 +32,9 @@ class DifferTest extends TestCase
         ];
     }
 
-    private function getPathToFixtures(string $fileName): string
+    private function getFixtureFullPath(string $fileName): string
     {
-        return self::FIXTURES_FOLDER . '/' . $fileName;
+        $parts = [__DIR__, 'fixtures', $fileName];
+        return implode('/', $parts);
     }
 }
