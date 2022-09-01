@@ -23,18 +23,18 @@ function generateStylishOutput(array $node, int $depth = 0): string
     $indent = getIndent($depth);
     $name = $node['name'];
     $type = $node['type'];
-    $stringifyOldValue = stringify($node['oldValue'], $depth);
-    $stringifyNewValue = stringify($node['newValue'], $depth);
+    $stringifiedOldValue = stringify($node['oldValue'], $depth);
+    $stringifiedNewValue = stringify($node['newValue'], $depth);
     $stylishOutput = format($node['children'], $depth + 1);
 
     return match ($node['type']) {
-        'added'     => "{$indent}  + {$name}: {$stringifyNewValue}",
-        'removed'   => "{$indent}  - {$name}: {$stringifyOldValue}",
+        'added'     => "{$indent}  + {$name}: {$stringifiedNewValue}",
+        'removed'   => "{$indent}  - {$name}: {$stringifiedOldValue}",
         'changed'   => implode("\n", [
-            "{$indent}  - {$name}: {$stringifyOldValue}",
-            "{$indent}  + {$name}: {$stringifyNewValue}",
+            "{$indent}  - {$name}: {$stringifiedOldValue}",
+            "{$indent}  + {$name}: {$stringifiedNewValue}",
         ]),
-        'unchanged' => "{$indent}    {$name}: {$stringifyOldValue}",
+        'unchanged' => "{$indent}    {$name}: {$stringifiedOldValue}",
         'nested'    => rtrim("{$indent}    {$name}: {$stylishOutput}"),
         default     => throw new \RuntimeException("Unknown node type: '{$type}'"),
     };
@@ -69,10 +69,10 @@ function stringifyComplexValue(mixed $complexValue, int $depth): string
 
     $indent = getIndent($depth);
 
-    $stringifyValue = array_map(static function ($value, $key) use ($depth, $indent) {
+    $stringifiedValue = array_map(static function ($value, $key) use ($depth, $indent) {
         $formattedValue = stringify($value, $depth);
         return "{$indent}    {$key}: {$formattedValue}";
     }, $normalizedValue, array_keys($normalizedValue));
 
-    return implode("\n", ["{", ...$stringifyValue, "{$indent}}"]);
+    return implode("\n", ["{", ...$stringifiedValue, "{$indent}}"]);
 }

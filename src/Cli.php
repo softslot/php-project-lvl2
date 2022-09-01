@@ -11,9 +11,6 @@ use function Differ\Differ\genDiff;
  */
 function run(): string
 {
-
-//    return "HELLO\n";
-
     $doc = <<<DOC
 
     Generate diff
